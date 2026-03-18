@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Journal Viewer</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .journal-page { display: none; }
+        .journal-page.active { display: block; }
+    </style>
+    <script>
+        let currentPage = 1;
+        function showPage(page) {
+            document.querySelectorAll('.journal-page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + page).classList.add('active');
+            currentPage = page;
+        }
+        function nextPage() {
+            if (currentPage < 15) showPage(currentPage + 1);
+        }
+        function prevPage() {
+            if (currentPage > 1) showPage(currentPage - 1);
+        }
+        function checkPassword(page) {
+            let password = prompt('Enter password for page ' + page + ':');
+            return (page === 5 && password === 'secret1') || (page === 10 && password === 'secret2') || (page === 15 && password === 'secret3');
+        }
+        function accessPage(page) {
+            if (page === 5 || page === 10 || page === 15) {
+                if (checkPassword(page)) {
+                    showPage(page);
+                } else {
+                    alert('Incorrect password!');
+                }
+            } else {
+                showPage(page);
+            }
+        }
+    </script>
+</head>
+<body onload='showPage(1)'>
+    <h1>Journal Viewer</h1>
+    <div id='page1' class='journal-page'><h2>Page 1</h2><p>This is the content of page 1.</p></div>
+    <div id='page2' class='journal-page'><h2>Page 2</h2><p>This is the content of page 2.</p></div>
+    <div id='page3' class='journal-page'><h2>Page 3</h2><p>This is the content of page 3.</p></div>
+    <div id='page4' class='journal-page'><h2>Page 4</h2><p>This is the content of page 4.</p></div>
+    <div id='page5' class='journal-page'><h2>Page 5</h2><p>This is the content of page 5. (Password Protected)</p></div>
+    <div id='page6' class='journal-page'><h2>Page 6</h2><p>This is the content of page 6.</p></div>
+    <div id='page7' class='journal-page'><h2>Page 7</h2><p>This is the content of page 7.</p></div>
+    <div id='page8' class='journal-page'><h2>Page 8</h2><p>This is the content of page 8.</p></div>
+    <div id='page9' class='journal-page'><h2>Page 9</h2><p>This is the content of page 9.</p></div>
+    <div id='page10' class='journal-page'><h2>Page 10</h2><p>This is the content of page 10. (Password Protected)</p></div>
+    <div id='page11' class='journal-page'><h2>Page 11</h2><p>This is the content of page 11.</p></div>
+    <div id='page12' class='journal-page'><h2>Page 12</h2><p>This is the content of page 12.</p></div>
+    <div id='page13' class='journal-page'><h2>Page 13</h2><p>This is the content of page 13.</p></div>
+    <div id='page14' class='journal-page'><h2>Page 14</h2><p>This is the content of page 14.</p></div>
+    <div id='page15' class='journal-page'><h2>Page 15</h2><p>This is the content of page 15. (Password Protected)</p></div>
+    <button onclick='prevPage()'>Previous</button>
+    <button onclick='nextPage()'>Next</button>
+</body>
+</html>
