@@ -1,60 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Journal Viewer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leather-Themed Journal Viewer</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .journal-page { display: none; }
-        .journal-page.active { display: block; }
-    </style>
-    <script>
-        let currentPage = 1;
-        function showPage(page) {
-            document.querySelectorAll('.journal-page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page' + page).classList.add('active');
-            currentPage = page;
+        body {
+            background-color: #7a5d4f; /* Leather brown background */
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        function nextPage() {
-            if (currentPage < 15) showPage(currentPage + 1);
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        function prevPage() {
-            if (currentPage > 1) showPage(currentPage - 1);
+        .page {
+            background-color: white;
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            padding: 20px;
+            position: relative;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        function checkPassword(page) {
-            let password = prompt('Enter password for page ' + page + ':');
-            return (page === 5 && password === 'secret1') || (page === 10 && password === 'secret2') || (page === 15 && password === 'secret3');
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
-        function accessPage(page) {
-            if (page === 5 || page === 10 || page === 15) {
-                if (checkPassword(page)) {
-                    showPage(page);
-                } else {
-                    alert('Incorrect password!');
-                }
-            } else {
-                showPage(page);
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5a3d2f;
+            color: white;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #8b6b50;
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #5a3d2f;
+            height: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        @media (max-width: 768px) {
+            .page {
+                width: 100%;
+                height: auto;
+                margin: 10px;
             }
         }
-    </script>
+    </style>
 </head>
-<body onload='showPage(1)'>
-    <h1>Journal Viewer</h1>
-    <div id='page1' class='journal-page'><h2>Page 1</h2><p>This is the content of page 1.</p></div>
-    <div id='page2' class='journal-page'><h2>Page 2</h2><p>This is the content of page 2.</p></div>
-    <div id='page3' class='journal-page'><h2>Page 3</h2><p>This is the content of page 3.</p></div>
-    <div id='page4' class='journal-page'><h2>Page 4</h2><p>This is the content of page 4.</p></div>
-    <div id='page5' class='journal-page'><h2>Page 5</h2><p>This is the content of page 5. (Password Protected)</p></div>
-    <div id='page6' class='journal-page'><h2>Page 6</h2><p>This is the content of page 6.</p></div>
-    <div id='page7' class='journal-page'><h2>Page 7</h2><p>This is the content of page 7.</p></div>
-    <div id='page8' class='journal-page'><h2>Page 8</h2><p>This is the content of page 8.</p></div>
-    <div id='page9' class='journal-page'><h2>Page 9</h2><p>This is the content of page 9.</p></div>
-    <div id='page10' class='journal-page'><h2>Page 10</h2><p>This is the content of page 10. (Password Protected)</p></div>
-    <div id='page11' class='journal-page'><h2>Page 11</h2><p>This is the content of page 11.</p></div>
-    <div id='page12' class='journal-page'><h2>Page 12</h2><p>This is the content of page 12.</p></div>
-    <div id='page13' class='journal-page'><h2>Page 13</h2><p>This is the content of page 13.</p></div>
-    <div id='page14' class='journal-page'><h2>Page 14</h2><p>This is the content of page 14.</p></div>
-    <div id='page15' class='journal-page'><h2>Page 15</h2><p>This is the content of page 15. (Password Protected)</p></div>
-    <button onclick='prevPage()'>Previous</button>
-    <button onclick='nextPage()'>Next</button>
+<body>
+    <div class="container">
+        <h1>Leather-Themed Journal Viewer</h1>
+        <div class="page" id="page-1">
+            <div>Page 1 Content</div>
+            <div class="navigation">
+                <button onclick="prevPage(1)" disabled>Previous</button>
+                <button onclick="nextPage(1)">Next</button>
+            </div>
+            <div class="progress-bar" style="width: 6.66%;"></div>
+        </div>
+        <script>
+            let currentPage = 1;
+            const totalPages = 15;
+            const passwords = ['','secret1','','secret2','','secret3']; // Passwords for pages 5, 10, 15
+
+            function nextPage(pageNum) {
+                if (pageNum < totalPages) {
+                    currentPage++;
+                    updatePage();
+                }
+            }
+
+            function prevPage(pageNum) {
+                if (pageNum > 1) {
+                    currentPage--;
+                    updatePage();
+                }
+            }
+
+            function updatePage() {
+                const page = document.getElementById(`page-${currentPage}`);
+                if (page) {
+                    page.scrollIntoView({ behavior: 'smooth' });
+                }
+                document.querySelector('.progress-bar').style.width = (currentPage / totalPages * 100) + '%';
+                document.querySelector('.navigation button:first-child').disabled = (currentPage === 1);
+                document.querySelector('.navigation button:last-child').disabled = (currentPage === totalPages);
+                if (passwords[currentPage - 1]) {
+                    const password = prompt('Enter password for page ' + currentPage + ':');
+                    if (password !== passwords[currentPage - 1]) {
+                        alert('Incorrect password!');
+                        currentPage--;
+                        updatePage();
+                    }
+                }
+            }
+        </script>
+    </div>
 </body>
 </html>
