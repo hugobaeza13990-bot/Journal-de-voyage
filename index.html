@@ -1,1 +1,170 @@
-A complete HTML journal viewer with leather background, A4 white pages, 15 pages total, pages 5, 10, and 15 are locked with password fields and location titles (Lieu 1, Lieu 2, Lieu 3), password for page 5 is "Mont Michael", password for page 10 is "The Five Fingers", password for page 15 is "Place des Fêtes", each locked page has a password input field with a submit button, when correct password is entered the page unlocks and shows content, navigation buttons Previous and Next with progress bar, responsive design for mobile, styled with leather brown background and A4 style white pages with shadow effects
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leather-Themed Journal Viewer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #8B4513;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #a0522d;
+            border-radius: 10px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leather-Themed Journal Viewer</h1>
+        <div id="pages">
+            <!-- Page 1 -->
+            <div class="page active">
+                <h2>Page 1</h2>
+                <p>Content of page 1.</p>
+            </div>
+            <!-- Page 2 -->
+            <div class="page">
+                <h2>Page 2</h2>
+                <p>Content of page 2.</p>
+            </div>
+            <!-- Page 3 -->
+            <div class="page">
+                <h2>Page 3</h2>
+                <p>Content of page 3.</p>
+            </div>
+            <!-- Page 4 -->
+            <div class="page">
+                <h2>Page 4</h2>
+                <p>Content of page 4.</p>
+            </div>
+            <!-- Page 5 (Locked) -->
+            <div class="page">
+                <h2>Lieu 1</h2>
+                <p>Content of page 5. Enter password to view:</p>
+                <input type="password" id="pass1" placeholder="Mont Michael">
+                <button onclick="unlockPage(1, 'Mont Michael', pass1.value)">Unlock</button>
+                <p id="msg1"></p>
+            </div>
+            <!-- Page 6 -->
+            <div class="page">
+                <h2>Page 6</h2>
+                <p>Content of page 6.</p>
+            </div>
+            <!-- Page 7 -->
+            <div class="page">
+                <h2>Page 7</h2>
+                <p>Content of page 7.</p>
+            </div>
+            <!-- Page 8 -->
+            <div class="page">
+                <h2>Page 8</h2>
+                <p>Content of page 8.</p>
+            </div>
+            <!-- Page 9 -->
+            <div class="page">
+                <h2>Page 9</h2>
+                <p>Content of page 9.</p>
+            </div>
+            <!-- Page 10 (Locked) -->
+            <div class="page">
+                <h2>Lieu 2</h2>
+                <p>Content of page 10. Enter password to view:</p>
+                <input type="password" id="pass2" placeholder="The Five Fingers">
+                <button onclick="unlockPage(2, 'The Five Fingers', pass2.value)">Unlock</button>
+                <p id="msg2"></p>
+            </div>
+            <!-- Page 11 -->
+            <div class="page">
+                <h2>Page 11</h2>
+                <p>Content of page 11.</p>
+            </div>
+            <!-- Page 12 -->
+            <div class="page">
+                <h2>Page 12</h2>
+                <p>Content of page 12.</p>
+            </div>
+            <!-- Page 13 -->
+            <div class="page">
+                <h2>Page 13</h2>
+                <p>Content of page 13.</p>
+            </div>
+            <!-- Page 14 -->
+            <div class="page">
+                <h2>Page 14</h2>
+                <p>Content of page 14.</p>
+            </div>
+            <!-- Page 15 (Locked) -->
+            <div class="page">
+                <h2>Lieu 3</h2>
+                <p>Content of page 15. Enter password to view:</p>
+                <input type="password" id="pass3" placeholder="Place des Fêtes">
+                <button onclick="unlockPage(3, 'Place des Fêtes', pass3.value)">Unlock</button>
+                <p id="msg3"></p>
+            </div>
+        </div>
+        <div class="navigation">
+            <button onclick="previousPage()">Previous</button>
+            <button onclick="nextPage()">Next</button>
+            <div id="progressBar" style="width: 100%; height: 10px; background: #ddd;">
+                <div id="progress" style="width: 0%; height: 100%; background: #4caf50;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        const progress = document.getElementById('progress');
+
+        function updateProgress() {
+            const totalPages = pages.length;
+            progress.style.width = ((currentPage + 1) / totalPages) * 100 + '%';
+        }
+
+        function unlockPage(pageNumber, password, inputPassword) {
+            if (inputPassword === password) {
+                pages[pageNumber].style.display = 'block';
+                document.getElementById('msg' + (pageNumber + 1)).innerText = '';
+            } else {
+                document.getElementById('msg' + (pageNumber + 1)).innerText = 'Incorrect password!';
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                pages[currentPage].classList.remove('active');
+                currentPage--;
+                pages[currentPage].classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].classList.remove('active');
+                currentPage++;
+                pages[currentPage].classList.add('active');
+                updateProgress();
+            }
+        }
+    </script>
+</body>
+</html>
