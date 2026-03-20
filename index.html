@@ -104,12 +104,26 @@ Mais cette fois, un début éclairé.</p>
             </div>
             <!-- Page 5 (Locked) -->
             <div class="page">
-                <h2>Page 5: Lieu 1</h2>
-                <p>Mot de passe requis pour acces à la page:</p>
-                <input type="password" id="pass1" placeholder="Enter mot de passe">
-                <button onclick="unlockPage(4, 'Mont Michael', pass1.value)">Unlock</button>
-                <p id="msg1"></p>
-            </div>
+    <h2>Page 5: Lieu 1</h2>
+
+    <!-- Zone verrouillée -->
+    <div id="lock1">
+        <p>Mot de passe requis pour accès à la page :</p>
+        <input type="password" id="pass1" placeholder="Enter mot de passe">
+        <button onclick="unlockPage(4, 'Mont Michael', pass1.value)">Unlock</button>
+        <p id="msg1"></p>
+    </div>
+
+    <!-- Zone cachée -->
+    <div id="content1" style="display: none;">
+        <h3>Mont Saint-Michel</h3>
+        <p>
+            Ici commence la véritable découverte. Les structures observées prennent enfin sens.
+        </p>
+        <img src="mont.jpg" alt="Mont Saint-Michel" style="max-width:300px;">
+    </div>
+
+</div>
             <!-- Page 6 -->
             <div class="page">
                 <h2>Page 6</h2>
@@ -488,13 +502,21 @@ Et aller encore plus loin.</p>
         }
 
         function unlockPage(pageNumber, password, inputPassword) {
-            if (inputPassword === password) {
-                pages[pageNumber].style.display = 'block';
-                document.getElementById('msg' + (pageNumber + 1)).innerText = '';
-            } else {
-                document.getElementById('msg' + (pageNumber + 1)).innerText = 'Incorrect password!';
-            }
-        }
+    if (inputPassword === password) {
+
+        // cacher le bloc mot de passe
+        document.getElementById('lock1').style.display = 'none';
+
+        // afficher le contenu réel
+        document.getElementById('content1').style.display = 'block';
+
+        // enlever message erreur
+        document.getElementById('msg1').innerText = '';
+
+    } else {
+        document.getElementById('msg1').innerText = 'Incorrect password!';
+    }
+}
 
         function previousPage() {
             if (currentPage > 0) {
