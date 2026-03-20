@@ -116,9 +116,9 @@ Mais cette fois, un début éclairé.</p>
 
     <!-- Zone cachée -->
     <div id="content1" style="display: none;">
-        <h3>Mont Saint-Michel</h3>
+        <h3>Mont Michael</h3>
         <p>
-            Ici commence la véritable découverte. Les structures observées prennent enfin sens.
+            Moi qui pensais enfin trouver la verité, je me retrouve avec seulement une partie de traduction de ces runes, malheureusement pas assez pour comprendre quoi que ce soit. En revanche dans une cavité sur les abords du Mont j'ai trouvé une incription gravé dans la roche, cela mentionnait je crois d'autres lieu ou trouver ces runes.. Peut etre que cette quete de reponse s'annonce plus fastidieuse que j ene le pressentait. Je vais tout de même mettre ci joint la decouverte que j'ai faite, cel ame permettra de ne pas m'égarer au fur et a meseure. 
         </p>
         <img src="mont.jpg" alt="Mont Saint-Michel" style="max-width:300px;">
     </div>
@@ -241,13 +241,24 @@ Dans un lieu précis.
 Que je dois atteindre.</p>
             </div>
             <!-- Page 10 (Locked) -->
-            <div class="page">
-                <h2>Lieu 2</h2>
-                <p>Content of page 10. Enter password to view:</p>
-                <input type="password" id="pass2" placeholder="Enter mot de passe">
-                <button onclick="unlockPage(9, 'The Five Fingers', pass2.value)">Unlock</button>
-                <p id="msg2"></p>
-            </div>
+          <div class="page">
+    <h2>Lieu 2</h2>
+
+    <!-- Zone verrouillée -->
+    <div id="lock2">
+        <p>Mot de passe requis :</p>
+        <input type="password" id="pass2" placeholder="Enter mot de passe">
+        <button onclick="unlockPage(2, 'The Five Fingers', pass2.value)">Unlock</button>
+        <p id="msg2"></p>
+    </div>
+
+    <!-- Zone cachée -->
+    <div id="content2" style="display: none;">
+        <h3>The Five Fingers</h3>
+        <p>Contenu débloqué ici</p>
+        <img src="images/fingers.jpg" style="max-width:300px;">
+    </div>
+</div>
             <!-- Page 11 -->
             <div class="page">
                 <h2>Page 11</h2>
@@ -475,13 +486,23 @@ Peut-être que quelqu’un, quelque part, pourra reprendre là où je m’arrêt
 Et aller encore plus loin.</p>
             </div>
             <!-- Page 15 (Locked) -->
-            <div class="page">
-                <h2>Lieu 3</h2>
-                <p>Content of page 15. Enter password to view:</p>
-                <input type="password" id="pass3" placeholder="Entrer mot de passe">
-                <button onclick="unlockPage(14, 'Place des Fêtes', pass3.value)">Unlock</button>
-                <p id="msg3"></p>
-            </div>
+          <div class="page">
+    <h2>Lieu 3</h2>
+
+    <!-- Zone verrouillée -->
+    <div id="lock3">
+        <p>Mot de passe requis :</p>
+        <input type="password" id="pass3" placeholder="Entrer mot de passe">
+        <button onclick="unlockPage(3, 'Place des Fêtes', pass3.value)">Unlock</button>
+        <p id="msg3"></p>
+    </div>
+
+    <!-- Zone cachée -->
+    <div id="content3" style="display: none;">
+        <h3>Place des Fêtes</h3>
+        <p>Contenu secret final</p>
+    </div>
+</div>
         </div>
         <div class="navigation">
             <button onclick="previousPage()">Précédent</button>
