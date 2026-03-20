@@ -110,7 +110,7 @@ Mais cette fois, un début éclairé.</p>
     <div id="lock1">
         <p>Mot de passe requis pour accès à la page :</p>
         <input type="password" id="pass1" placeholder="Enter mot de passe">
-        <button onclick="unlockPage(4, 'Mont Michael', pass1.value)">Unlock</button>
+       <button onclick="unlockPage(1, 'Mont Michael', pass1.value)">Unlock</button>
         <p id="msg1"></p>
     </div>
 
@@ -501,20 +501,20 @@ Et aller encore plus loin.</p>
             progress.style.width = ((currentPage + 1) / totalPages) * 100 + '%';
         }
 
-        function unlockPage(pageNumber, password, inputPassword) {
+       function unlockPage(id, password, inputPassword) {
     if (inputPassword === password) {
 
         // cacher le bloc mot de passe
-        document.getElementById('lock1').style.display = 'none';
+        document.getElementById('lock' + id).style.display = 'none';
 
         // afficher le contenu réel
-        document.getElementById('content1').style.display = 'block';
+        document.getElementById('content' + id).style.display = 'block';
 
         // enlever message erreur
-        document.getElementById('msg1').innerText = '';
+        document.getElementById('msg' + id).innerText = '';
 
     } else {
-        document.getElementById('msg1').innerText = 'Incorrect password!';
+        document.getElementById('msg' + id).innerText = 'Incorrect password!';
     }
 }
 
